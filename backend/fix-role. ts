@@ -1,0 +1,7 @@
+import prisma from './src/config/prisma.js';
+await prisma.user.update({ 
+  where: { email: 'test@cdas.org' }, 
+  data: { role: 'ADMIN' } 
+});
+console.log('Role updated to ADMIN');
+await prisma.$disconnect();

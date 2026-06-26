@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  EXECUTIVE
+  MEMBER
+}
+
+enum MemberStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum DuesStatus {
+  PENDING
+  PAID
+  OVERDUE
+  WAIVED
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(MEMBER)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  member Member?
+
+  @@map("users")
+}
+
+model Member {
+  id           String       @id @default(uuid())
+  membershipNo String       @unique
+  fullName     String
+  email        String?
+  phone        String?
+  address      String?
+  dateOfBirth  DateTime?
+  gender       String?
+  occupation   String?
+  photoUrl     String?
+  joinDate     DateTime     @default(now())
+  status       MemberStatus @default(ACTIVE)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  userId String? @unique
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  dues            Dues[]
+  eventAttendance EventAttendance[]
+
+  @@map("members")
+}
+
+model DuesPeriod {
+  id        String   @id @default(uuid())
+  label     String
+  amount    Decimal  @db.Decimal(10, 2)
+  dueDate   DateTime
+  createdAt DateTime @default(now())
+
+  dues Dues[]
+
+  @@map("dues_periods")
+}
+
+model Dues {
+  id           String     @id @default(uuid())
+  memberId     String
+  duesPeriodId String
+  amountPaid   Decimal    @default(0) @db.Decimal(10, 2)
+  status       DuesStatus @default(PENDING)
+  paidDate     DateTime?
+  paymentRef   String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  member     Member     @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  duesPeriod DuesPeriod @relation(fields: [duesPeriodId], references: [id], onDelete: Cascade)
+
+  @@unique([memberId, duesPeriodId])
+  @@map("dues")
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  location    String?
+  eventDate   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  attendance EventAttendance[]
+
+  @@map("events")
+}
+
+model EventAttendance {
+  id       String   @id @default(uuid())
+  eventId  String
+  memberId String
+  attended Boolean  @default(false)
+  markedAt DateTime @default(now())
+
+  event  Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, memberId])
+  @@map("event_attendance")
+}
