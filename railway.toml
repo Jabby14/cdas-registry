@@ -1,0 +1,3 @@
+[build]
+rootDirectory = "frontend"
+buildCommand = "npm run build"
