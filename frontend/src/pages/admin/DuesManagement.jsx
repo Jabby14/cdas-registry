@@ -40,7 +40,7 @@ export default function DuesManagement() {
       {periods.length > 0 && (
         <select value={selectedPeriod} onChange={e => setSelectedPeriod(e.target.value)}
           className="border border-slate-200 rounded px-3 py-1.5 text-sm">
-          {periods.map(p => <option key={p.id} value={p.id}>{p.label} � N{Number(p.amount).toLocaleString()}</option>)}
+          {periods.map(p => <option key={p.id} value={p.id}>{p.label} ï¿½ N{Number(p.amount).toLocaleString()}</option>)}
         </select>
       )}
       <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
