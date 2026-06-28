@@ -12,5 +12,5 @@
     "resolveJsonModule": true,
     "types": ["node"]
   },
-  "exclude": ["node_modules", "prisma"]
+  "exclude": ["node_modules", "prisma", "prisma.config.ts"]
 }
