@@ -1,7 +1,7 @@
-app.use(cors({
-  origin: [
-    "https://cdas-registery.netlify.app",
-    "http://localhost:5173"
-  ],
-  credentials: true
-}));
+import app from './app.js';
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`CDAS Registry API running on http://localhost:${PORT}`);
+});
