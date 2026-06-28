@@ -4,15 +4,15 @@
   "description": "Community Development Association Member Registry System API",
   "type": "module",
   "main": "dist/server.js",
-  "scripts": {
-    "dev": "nodemon --exec \"node --import tsx src/server.ts\"",
-    "build": "tsc",
-    "start": "npx prisma migrate deploy && tsx src/server.ts"
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio",
-    "seed": "tsx prisma/seed.ts"
-  },
+ "scripts": {
+  "dev": "nodemon --exec \"node --import tsx src/server.ts\"",
+  "build": "tsc",
+  "start",: "npx prisma migrate deploy && npx tsx src/server.ts",
+  "prisma:generate": "prisma generate",
+  "prisma:migrate": "prisma migrate dev",
+  "prisma:studio": "prisma studio",
+  "seed": "tsx prisma/seed.ts"
+},
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
