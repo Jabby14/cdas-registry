@@ -1,23 +1,15 @@
 {
   "compilerOptions": {
-    "strict": false,
-    "skipLibCheck": true
-  }
-}
-
-  "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "skipLibCheck": true,
     "outDir": "dist",
     "rootDir": "src",
     "resolveJsonModule": true,
     "types": ["node"]
-  },
-  "include": ["src/**/*.ts", "src/controllers/eventsController.ts"],
-  "exclude": ["node_modules", "dist"]
+  }
 }
