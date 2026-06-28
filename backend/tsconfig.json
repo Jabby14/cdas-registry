@@ -1,16 +1,12 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "module": "CommonJS",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": false,
     "skipLibCheck": true,
     "outDir": "dist",
-    "rootDir": "src",
-    "resolveJsonModule": true,
-    "types": ["node"]
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "prisma", "prisma.config.ts"]
 }
